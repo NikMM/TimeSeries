@@ -1,7 +1,5 @@
 library(shiny)
 library(shinydashboard)
-library(ggplot2)
-library(dygraphs)
 
 header <-  dashboardHeader(titleWidth = 180, title = "")
 bar <- dashboardSidebar(width = 180,
@@ -19,14 +17,34 @@ body <- dashboardBody(
         tabItems(
           
           
-          ## Временной ряд
-          
-          tabItem(tabName = "timeSerie",
-                  fluidRow(
-                    tabBox(width = 8,  id = "tabset2",
-                           
-                           tabPanel("Временной ряд", value=1,
-                                    dygraphOutput("dygraphFirst"))
+    ## Временной ряд
+    
+    tabItem(tabName = "timeSerie",
+           
+       fluidRow(
+        tabBox(width = 8,  id = "tabset2",
+               tabPanel("Временной ряд", value=1,
+                        dygraphOutput("dygraphFirst")),
+               
+               tabPanel("Декомпозиция", value=2,
+                        plotOutput("plotSTL", height = '500px'),
+                        p("Выше показаны: исходный временной ряд, сезонность, тренд, ошибка."), 
+                        p("Наличие плавно растущего тренда и сезонного фактора, - колебания примерно постоянны с течением времени, говорят о не стационарности данного ряда.")
+               ),
+               
+               tabPanel("Автокорреляция", value=3,
+                        helpText("АКФ и ЧАКФ исходного ряда"),
+                        plotOutput("plotAcfV"),
+                        plotOutput("plotPacfV"),
+                        helpText("Временной ряд после взятия разности"),
+                        plotOutput("plotDiff")
+                        # helpText("АКФ и ЧАКФ"),
+                        # plotOutput("plotAcfD"),
+                        # plotOutput("plotPacfD")
+                        
+               )
+               
+                          
                            
                            )))))
 
