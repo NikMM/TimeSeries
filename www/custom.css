@@ -1,0 +1,112 @@
+ 
+  body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: darkslategrey;
+    background-color: #fff;
+}
+
+
+.main-header .logo {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #9d9d9d;
+  font-size: 14px;
+}
+
+ /* верхняя левая панель */
+
+    .skin-blue .main-header .logo, .skin-blue .main-header .logo:hover {
+          background-color: #303641;
+        }
+
+/* верхняя основная панель */
+
+    .skin-blue .main-header .navbar,  .skin-blue .main-header .navbar .sidebar-toggle:hover{
+         background-color: #303641;
+
+    }
+
+/* боковая панель  */
+.sidebar {
+color: darkslategray;
+}
+.label{
+        font-weight: 0;
+}
+.sidebar .irs-min, .sidebar .irs-max {
+    color: #959595;
+}
+
+
+
+/*
+  .sidebar-menu {
+    list-style: none;
+    list-style-type: none;
+    list-style-position: initial;
+    list-style-image: initial;
+    margin: 0;
+    margin-top: 20px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    padding: 0;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+}
+*/
+
+
+    .skin-blue .left-side, .skin-blue .main-sidebar, .skin-blue .wrapper {
+        border-right: 2px solid #E9EBED;
+        background-color:  #f4f4f4;
+        
+        
+    }
+
+    .skin-blue .sidebar a {
+       color: darkslategray;
+        
+    }
+
+    .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a {
+        color: #362d68;
+        background: #edeef0;
+        border-left-color: #f2f6fa;
+    }
+    
+ /*     .left-side, .main-sidebar, .main-header .logo  {
+        width: 180px;
+
+    }
+
+  .content-wrapper, .main-footer, .right-side, .main-header>.navbar {
+        margin-left: 180px;
+    }
+   */ 
+
+.irs-slider {
+    
+    width: 18px;
+    height: 18px;
+    border: 1px solid #AAA;
+    background: #DDD;
+    border-radius: 27px;
+    -moz-border-radius: 27px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+
+
+
+
+/*  background-color: #5d8db3;
+navbar-btn sidebar-toggle
+
+*/
+
+
