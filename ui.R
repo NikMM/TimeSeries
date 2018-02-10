@@ -42,11 +42,48 @@ body <- dashboardBody(
                         # plotOutput("plotAcfD"),
                         # plotOutput("plotPacfD")
                         
-               )
+               ),
+               
+               tabPanel("Прогноз", value=4,
+                        
+                        fluidRow(
+                          box(width = 12,  solidHeader = TRUE,
+                                plotOutput("plotArima", height = 300)),
+                          
+                          box(width = 5, solidHeader = TRUE, 
+                               inputPanel( 
+                                 selectInput("predSelect", "Метод:",  
+                                             c("Arima" = "arima",
+                                               "ETS" = "ets",
+                                               "Naive" = "naive",
+                                               "Rwdrift" = "rwdrift")),
+                                 sliderInput("arPeriod", "Длина прогноза:",
+                                             min = 10, max = 250,
+                                             value = 100),
+                                 sliderInput("dovInt", "Дов. интервал %:", width = '300px', 1, 99, 
+                                             value = c(75, 95))
+                               ))
+                          
+                          # box(width = 7, solidHeader = T,
+                          #      br(),
+                          # downloadButton(outputId = 'downloadArima',
+                          #                label = "Скачать", icon = icon("download"))
+                      
+                          # box( width = 5,  solidHeader = TRUE, 
+                          # inputPanel(
+                          # sliderInput("dovInt", "Доверительный интервал %:", 1, 99, 
+                          #             value = c(75, 95)),
+                          # ),
+                          # ), 
+                          
+                          
+                        ))
+        )
                
                           
+               
                            
-                           )))))
+                           ))))
 
 dashboardPage(header, bar, body)
 

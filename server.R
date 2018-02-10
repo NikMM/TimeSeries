@@ -50,6 +50,29 @@ shinyServer(function(input, output) {
       
     })
     
+    # Прогноз 
+    
+    predArima <- reactive(autoplot(forecast(dow1_stl, method= input$predSelect, 
+                                            h =  input$arPeriod, 
+                                            level=input$dovInt), 
+                                   ylab="Цена",xlab=""))
+    
+    output$plotArima <- renderPlot(predArima())
+    
+    
+    # downloadButton('downloadArima ', 'Download')
+    output$downloadArima <- downloadHandler(
+      filename = function() {
+        # paste("Pred-", Sys.Date(), ".csv", sep="")
+        paste("Pred",gsub("-",Sys.Date()), ".csv", sep="")
+      },
+      content = function(file) {
+        write.csv(predArima(), file)
+        dev.off()
+      }
+    )
+    
+    
 
   
   
