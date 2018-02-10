@@ -1,5 +1,7 @@
 library(shiny)
 library(shinydashboard)
+library(dygraphs)
+library(markdown)
 
 header <-  dashboardHeader(titleWidth = 180, title = "")
 bar <- dashboardSidebar(width = 180,
@@ -48,21 +50,34 @@ body <- dashboardBody(
                         
                         fluidRow(
                           box(width = 12,  solidHeader = TRUE,
-                                plotOutput("plotArima", height = 300)),
+                              
+                              conditionalPanel(
+                                condition = "input.tabset2 == 4",
+                                
+                                conditionalPanel(
+                                  condition = "input.predSelect == 'arima'",
+                                  includeMarkdown("content/prediction.md")
+                                ),
+                                
+                                conditionalPanel(
+                                  condition = "input.predSelect == 'ets'",
+                                  includeMarkdown("content/predictionEt.md")
+                                ),                
+                                
+                                conditionalPanel(
+                                  condition = "input.predSelect == 'naive'",
+                                  includeMarkdown("content/predictionNa.md")
+                                ),   
+                                
+                                conditionalPanel(
+                                  condition = "input.predSelect == 'rwdrift'",
+                                  includeMarkdown("content/predictionRw.md")
+                                )
+                              ), 
+                              
+                                plotOutput("plotArima", height = 300))
                           
-                          box(width = 5, solidHeader = TRUE, 
-                               inputPanel( 
-                                 selectInput("predSelect", "Метод:",  
-                                             c("Arima" = "arima",
-                                               "ETS" = "ets",
-                                               "Naive" = "naive",
-                                               "Rwdrift" = "rwdrift")),
-                                 sliderInput("arPeriod", "Длина прогноза:",
-                                             min = 10, max = 250,
-                                             value = 100),
-                                 sliderInput("dovInt", "Дов. интервал %:", width = '300px', 1, 99, 
-                                             value = c(75, 95))
-                               ))
+
                           
                           # box(width = 7, solidHeader = T,
                           #      br(),
@@ -77,13 +92,78 @@ body <- dashboardBody(
                           # ), 
                           
                           
-                        ))
+                        ))),
+               
+               box(width = 4, #title = "", collapsible = T, 
+                   
+                   #   verbatimTextOutput("tabset2Selected"), br(),  
+     
+                   conditionalPanel(
+                     condition = "input.tabset2 == 1",
+                     includeMarkdown("content/timeSeries.md")
+                   ), 
+                   
+                   conditionalPanel(
+                     condition = "input.tabset2 == 2",
+                     includeMarkdown("content/description.md")
+                   ), 
+                   
+                   conditionalPanel(
+                     condition = "input.tabset2 == 3",
+                     includeMarkdown("content/autocorrelation.md")
+                   ),
+                   
+                   conditionalPanel(
+                     condition = "input.tabset2 == 4",
+                     box(width = 12, solidHeader = TRUE, 
+                         inputPanel( 
+                           selectInput("predSelect", "Метод:",  
+                                       c("Arima" = "arima",
+                                         "ETS" = "ets",
+                                         "Naive" = "naive",
+                                         "Rwdrift" = "rwdrift")),
+                           sliderInput("arPeriod", "Длина прогноза:",
+                                       min = 10, max = 250,
+                                       value = 100),
+                           sliderInput("dovInt", "Дов. интервал:", width = '300px', 1, 99, 
+                                       value = c(75, 95))
+                         ))
+                     
+                   )
+                   
+
+                   
+               
         )
-               
-                          
-               
-                           
-                           ))))
+                
+                           )),
+    
+    
+    
+    ## textdata
+    
+    tabItem(tabName = "textData",
+            fluidRow(
+              tabBox(width = 12, id = "tabset4",
+                     side = "left", height = "250px",
+                     selected = "Индекс",
+                     tabPanel(title = "Индекс", dataTableOutput("table")),
+                     tabPanel(title = "Новости", value=77,
+                              conditionalPanel( 'input.tabset4 == 77'
+                                               
+                                                
+                                                ),
+                              
+                              DT::dataTableOutput("table1")
+                     )
+              )
+              
+            )
+    )
+    
+    
+    
+    ))
 
 dashboardPage(header, bar, body)
 

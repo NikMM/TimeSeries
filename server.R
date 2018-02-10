@@ -11,6 +11,9 @@ source("timeSeries.R")
 
 shinyServer(function(input, output) { 
   
+    output$tabset2Selected <- renderText({
+      input$tabset2
+    }) 
  
    # Временной ряд 
   
@@ -21,8 +24,7 @@ shinyServer(function(input, output) {
         dySeries(label = "Цена") 
        
     })
-    
-    
+  
     # Декомпозиция
     
     output$plotSTL <- renderPlot({
@@ -71,6 +73,20 @@ shinyServer(function(input, output) {
         dev.off()
       }
     )
+    
+    
+    output$table <- renderDataTable({
+      quandl
+    })
+    
+    output$table1 <- DT::renderDataTable({
+      quandl
+      DT::datatable(quandl[, input$opts, drop = FALSE])
+    })
+    
+    
+    
+    
     
     
 

@@ -88,6 +88,13 @@ color: darkslategray;
     }
    */ 
 
+.h3, h3 {
+    font-size: 18px;
+     margin-top: 10px;
+}
+
+
+
 .irs-slider {
     
     width: 18px;
@@ -99,14 +106,4 @@ color: darkslategray;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     cursor: pointer;
 }
-
-
-
-
-
-/*  background-color: #5d8db3;
-navbar-btn sidebar-toggle
-
-*/
-
 
